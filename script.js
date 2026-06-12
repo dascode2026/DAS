@@ -1,126 +1,184 @@
 const data = {
 
-  /* ===================== ABA ===================== */
   aba: [
-    { code: "0110", desc: "جهد كهربي منخفض بسلك الكهرباء الخاص بالكنترول." },
-    { code: "0111", desc: "جهد كهربى مرتفع بسلك الكهرباء الخاص بالكنترول." },
-    { code: "0150", desc: "عطل داخلي بالكنترول." },
-    { code: "0160", desc: "عطل بنظام تشغيل الفرامل المساعدة ABA." },
-    { code: "0170", desc: "عطل داخلي بالكنترول." },
-    { code: "0180", desc: "خطأ في عملية بداية التشغيل." },
-    { code: "0205", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الردارى." },
-    { code: "0206", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الرداري." },
-    { code: "0290", desc: "اكتشاف اصطدام محتمل في مقدمة الشاحنة." },
-    { code: "0305", desc: "خطأ في الاتصال بين ABA و BS." },
-    { code: "0306", desc: "خطأ في شبكة CAN مع كنترول BS." },
-    { code: "0405", desc: "خطأ في الاتصال بين ABA و FR." },
-    { code: "0406", desc: "خطأ في شبكة CAN مع FR." },
-    { code: "0505", desc: "خطأ في الاتصال مع شاشة العدادات INS." },
-    { code: "0506", desc: "خطأ في شبكة CAN مع INS." },
-    { code: "0605", desc: "خطأ في الاتصال مع الكنترول الرئيسي GM." },
-    { code: "0606", desc: "خطأ في شبكة CAN مع GM." },
-    { code: "0705", desc: "خطأ في الاتصال مع MSF." },
-    { code: "0706", desc: "خطأ في شبكة CAN مع MSF." },
-    { code: "0805", desc: "خطأ في الاتصال مع TCO." },
-    { code: "0806", desc: "خطأ في شبكة CAN مع TCO." },
-    { code: "0905", desc: "انقطاع اتصال ABA مع شبكة CAN." },
-    { code: "0907", desc: "خطأ في اتصال CAN." },
-    { code: "1008", desc: "قطع في دائرة Terminal30." },
-    { code: "1108", desc: "قطع في دائرة Terminal15." },
-    { code: "1205", desc: "انقطاع الاتصال مع MR." },
-    { code: "1206", desc: "خطأ رسائل CAN من MR." },
-    { code: "1305", desc: "خطأ اتصال مع BTS." },
-    { code: "1306", desc: "خطأ رسائل CAN من BTS." }
+    { code: "0110", desc: "جهد منخفض." },
+    { code: "0111", desc: "جهد مرتفع." },
+    { code: "0150", desc: "عطل داخلي." },
+    { code: "0160", desc: "عطل نظام ABA." },
+    { code: "0170", desc: "عطل داخلي." },
+    { code: "0180", desc: "خطأ تشغيل." },
+    { code: "0205", desc: "اتصال رادار." },
+    { code: "0206", desc: "اتصال رادار." },
+    { code: "0290", desc: "احتمال اصطدام." },
+    { code: "0305", desc: "CAN خطأ." },
+    { code: "0306", desc: "CAN خطأ." },
+    { code: "0405", desc: "اتصال FR." },
+    { code: "0406", desc: "CAN FR." },
+    { code: "0505", desc: "INS خطأ." },
+    { code: "0506", desc: "CAN INS." },
+    { code: "0605", desc: "GM خطأ." },
+    { code: "0606", desc: "CAN GM." },
+    { code: "0705", desc: "MSF خطأ." },
+    { code: "0706", desc: "CAN MSF." },
+    { code: "0805", desc: "TCO خطأ." },
+    { code: "0806", desc: "CAN TCO." },
+    { code: "0905", desc: "انقطاع CAN." },
+    { code: "0907", desc: "CAN خطأ." },
+    { code: "1008", desc: "قطع Terminal30." },
+    { code: "1108", desc: "قطع Terminal15." },
+    { code: "1205", desc: "MR انقطاع." },
+    { code: "1206", desc: "MR CAN خطأ." },
+    { code: "1305", desc: "BTS خطأ." },
+    { code: "1306", desc: "BTS CAN خطأ." }
   ],
 
-  /* ===================== ART ===================== */
   art: [
-    { code: "0100", desc: "عطل داخلي بكنترول ART." },
-    { code: "0150", desc: "عطل كلي بكنترول ART." },
-    { code: "0200", desc: "عطل بحساس الرادار." },
-    { code: "0202", desc: "خطأ بين الرادار و ABA." },
-    { code: "0203", desc: "عطل قياس حرارة." },
-    { code: "0204", desc: "عطل قياس حرارة." },
-    { code: "0210", desc: "جهد منخفض Terminal15." },
-    { code: "0211", desc: "جهد مرتفع Terminal15." },
-    { code: "0250", desc: "عطل حساس الرادار." },
-    { code: "0251", desc: "عطل حساس داخلي." },
-    { code: "0270", desc: "خطأ رادار مع ABA." },
-    { code: "0290", desc: "عدم ضبط الرادار مع ABA." },
-    { code: "0291", desc: "تأثر الرادار بالحرارة." },
-    { code: "0299", desc: "الرادار يحتاج تنظيف." },
-    { code: "0300", desc: "عطل في ART." },
-    { code: "0350", desc: "عطل في ART." },
-    { code: "0405", desc: "رسائل CAN من HM." },
-    { code: "0406", desc: "رسائل CAN من HM." },
-    { code: "0505", desc: "رسائل CAN من INS." },
-    { code: "0506", desc: "رسائل CAN من INS." },
-    { code: "0605", desc: "رسائل CAN من BS." },
-    { code: "0606", desc: "رسائل CAN من BS." }
+    { code: "0100", desc: "عطل ART." },
+    { code: "0150", desc: "عطل كامل." },
+    { code: "0200", desc: "حساس رادار." },
+    { code: "0202", desc: "ABA ارتباط." },
+    { code: "0203", desc: "حرارة." },
+    { code: "0204", desc: "حرارة." },
+    { code: "0210", desc: "Terminal15 منخفض." },
+    { code: "0211", desc: "Terminal15 مرتفع." },
+    { code: "0250", desc: "رادار." },
+    { code: "0251", desc: "حساس داخلي." },
+    { code: "0270", desc: "ABA خطأ." },
+    { code: "0290", desc: "عدم ضبط." },
+    { code: "0291", desc: "حرارة." },
+    { code: "0299", desc: "تنظيف مطلوب." },
+    { code: "0300", desc: "ART خطأ." },
+    { code: "0350", desc: "ART خطأ." },
+    { code: "0405", desc: "HM CAN." },
+    { code: "0406", desc: "HM CAN." },
+    { code: "0407", desc: "مستوى شاحنة." },
+    { code: "0505", desc: "INS CAN." },
+    { code: "0506", desc: "INS CAN." },
+    { code: "0605", desc: "BS CAN." },
+    { code: "0606", desc: "BS CAN." },
+    { code: "0615", desc: "BS فرامل." },
+    { code: "0616", desc: "BS فرامل." },
+    { code: "0625", desc: "سرعة محور." },
+    { code: "0800", desc: "CAN عطل." },
+    { code: "0801", desc: "شاسيه CAN." },
+    { code: "1105", desc: "FR CAN." },
+    { code: "1106", desc: "FR CAN." },
+    { code: "1107", desc: "سرعة." },
+    { code: "1205", desc: "TCO CAN." },
+    { code: "1206", desc: "TCO CAN." },
+    { code: "1305", desc: "INS طاقة." },
+    { code: "1306", desc: "INS طاقة." }
   ],
 
-  /* ===================== BS ===================== */
   bs: [
-    { code: "0117", desc: "عدم تطابق السرعة TCO." },
-    { code: "0160", desc: "عطل CAN Bus." },
-    { code: "0162", desc: "عطل CAN Bus." },
-    { code: "0180", desc: "فقد بيانات CAN." },
-    { code: "0181", desc: "فقد بيانات CAN." },
-    { code: "0182", desc: "فقد بيانات CAN." },
-    { code: "0183", desc: "فقد بيانات CAN." },
-    { code: "0184", desc: "فقد بيانات CAN." },
-    { code: "0185", desc: "فقد بيانات CAN." },
-    { code: "0260", desc: "خطأ شبكة المقطورة." },
-    { code: "0263", desc: "قطع شبكة المقطورة." },
-    { code: "0275", desc: "عطل CAN عالي." },
-    { code: "0276", desc: "عطل CAN منخفض." },
-    { code: "0300", desc: "عطل CAN نظام الفرامل." },
-    { code: "0360", desc: "عطل CAN نظام الفرامل." },
-    { code: "0463", desc: "انقطاع CAN." },
-    { code: "0563", desc: "انقطاع CAN." },
-    { code: "1001", desc: "جهد مرتفع Terminal." },
-    { code: "1002", desc: "جهد منخفض Terminal." },
-    { code: "1010", desc: "عطل داخلي BS." },
-    { code: "1011", desc: "عطل EEPROM." },
-    { code: "1012", desc: "خطأ بيانات BS." },
-    { code: "1052", desc: "بيانات غير مكتملة." },
-    { code: "1094", desc: "إطارات غير مناسبة." },
-    { code: "1102", desc: "جهد منخفض Terminal30." },
-    { code: "1103", desc: "قطع Terminal30a." },
-    { code: "1202", desc: "جهد منخفض." },
-    { code: "1203", desc: "قطع سلك." },
-    { code: "1302", desc: "جهد منخفض Terminal15." },
-    { code: "1303", desc: "قطع Terminal15." },
-    { code: "1305", desc: "ماس كهربائي Terminal15." },
+    { code: "0117", desc: "سرعة غير متطابقة." },
+    { code: "0160", desc: "CAN Bus." },
+    { code: "0162", desc: "CAN Bus." },
+    { code: "0180", desc: "CAN فقد." },
+    { code: "0181", desc: "CAN فقد." },
+    { code: "0182", desc: "CAN فقد." },
+    { code: "0183", desc: "CAN فقد." },
+    { code: "0184", desc: "CAN فقد." },
+    { code: "0185", desc: "CAN فقد." },
+    { code: "0260", desc: "مقطورة." },
+    { code: "0263", desc: "مقطورة قطع." },
+    { code: "0275", desc: "CAN عالي." },
+    { code: "0276", desc: "CAN منخفض." },
+    { code: "0300", desc: "فرامل." },
+    { code: "0360", desc: "فرامل." },
+    { code: "0463", desc: "انقطاع." },
+    { code: "0563", desc: "انقطاع." },
+    { code: "1001", desc: "جهد عالي." },
+    { code: "1002", desc: "جهد منخفض." },
+    { code: "1010", desc: "BS عطل." },
+    { code: "1011", desc: "EEPROM." },
+    { code: "1012", desc: "بيانات." },
+    { code: "1052", desc: "برمجة." },
+    { code: "1094", desc: "إطارات." },
+    { code: "1102", desc: "30 منخفض." },
+    { code: "1103", desc: "30 قطع." },
+    { code: "1202", desc: "300 منخفض." },
+    { code: "1203", desc: "306 قطع." },
+    { code: "1302", desc: "15 منخفض." },
+    { code: "1303", desc: "15 قطع." },
+    { code: "1305", desc: "ماس." },
     { code: "1404", desc: "ماس حساس." },
-    { code: "1405", desc: "ماس حساس." }
+    { code: "1405", desc: "ماس." }
   ],
 
-  /* ===================== BTS ===================== */
   bts: [
-    { code: "0110", desc: "عطل داخلي BTS." },
-    { code: "0111", desc: "عطل داخلي BTS." },
-    { code: "0112", desc: "عطل داخلي BTS." },
-    { code: "0201", desc: "ماس دائرة الطوارئ." },
-    { code: "0202", desc: "ماس دائرة الطوارئ." },
-    { code: "0203", desc: "قطع دائرة الطوارئ." },
-    { code: "0341", desc: "جهد مرتفع." },
+    { code: "0110", desc: "BTS عطل." },
+    { code: "0111", desc: "BTS عطل." },
+    { code: "0112", desc: "BTS عطل." },
+    { code: "0201", desc: "ماس." },
+    { code: "0202", desc: "ماس." },
+    { code: "0203", desc: "قطع." },
+    { code: "0341", desc: "جهد عالي." },
     { code: "0342", desc: "جهد منخفض." },
-    { code: "0413", desc: "خطأ ريلاي البطارية." },
-    { code: "0515", desc: "لا توجد رسائل GM." }
+    { code: "0413", desc: "ريلاي." },
+    { code: "0515", desc: "لا رسائل." }
   ],
 
-  /* ===================== EDW ===================== */
   edw: [
-    { code: "F052", desc: "لا توجد تغذية TMF." },
-    { code: "F513", desc: "خطأ مفتاح الشاحنة." },
-    { code: "F611", desc: "قطع حساس باب السائق." },
-    { code: "F711", desc: "قطع حساس باب الراكب." },
-    { code: "F910", desc: "ماس LED الإنذار." },
-    { code: "F911", desc: "ماس أو قطع LED الإنذار." },
-    { code: "FA13", desc: "قطع جرس الإنذار." },
-    { code: "FB11", desc: "قطع حساس داخلي." },
-    { code: "FB12", desc: "ماس حساس داخلي." },
-    { code: "FB13", desc: "خطأ DAS." }
+    { code: "5001", desc: "باب سائق." },
+    { code: "5002", desc: "قطع." },
+    { code: "5003", desc: "إشارة." },
+    { code: "5101", desc: "إنذار." },
+    { code: "5201", desc: "حساس باب." },
+    { code: "5301", desc: "جرس." },
+    { code: "5401", desc: "LED." }
   ]
 };
+  
+
+/* ===================== SEARCH ===================== */
+function searchCode() {
+  const value = document.getElementById("search").value.trim();
+
+  render();
+
+  if (value === "") return;
+  if (/\D/.test(value)) return;
+  if (value.length > 5) return;
+
+  let firstMatch = null;
+
+  for (let section in data) {
+    const rows = document.querySelectorAll(`#${section} tr`);
+
+    rows.forEach(row => {
+      const codeCell = row.querySelector(".code");
+
+      if (!codeCell) return;
+
+      const code = codeCell.textContent;
+
+      if (code.includes(value)) {
+        row.style.background = "#1f2937";
+        codeCell.innerHTML = highlight(code, value);
+
+        if (!firstMatch) firstMatch = row;
+      }
+    });
+  }
+
+  if (firstMatch) {
+    setTimeout(() => {
+      firstMatch.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 100);
+  }
+}
+
+/* ===================== HIGHLIGHT ===================== */
+function highlight(text, search) {
+  return text.replace(
+    new RegExp(search, "g"),
+    `<span class="highlight">${search}</span>`
+  );
+}
+
+/* ===================== INIT ===================== */
+render();
