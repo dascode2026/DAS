@@ -5,7 +5,6 @@ body{
   color:white;
 }
 
-/* ===== APP ===== */
 .app{
   height:100vh;
   display:flex;
@@ -24,8 +23,8 @@ body{
 }
 
 .title{
-  font-size:18px;
   font-weight:bold;
+  font-size:18px;
 }
 
 #search{
@@ -34,6 +33,7 @@ body{
   border:none;
   border-radius:10px;
   padding:0 10px;
+  font-size:16px;
 }
 
 /* ===== BODY ===== */
@@ -42,7 +42,7 @@ body{
   height:100%;
 }
 
-/* LEFT */
+/* LEFT PANEL */
 .left{
   width:35%;
   border-right:1px solid #334155;
@@ -51,8 +51,8 @@ body{
 
 #resultCount{
   padding:10px;
-  color:#38bdf8;
   text-align:center;
+  color:#38bdf8;
 }
 
 #list div{
@@ -65,13 +65,12 @@ body{
   background:#1f2937;
 }
 
-/* RIGHT */
+/* RIGHT PANEL */
 .right{
   width:65%;
   padding:20px;
 }
 
-/* DETAILS */
 .card{
   background:#111827;
   padding:20px;
@@ -84,11 +83,6 @@ body{
   color:#38bdf8;
 }
 
-.desc{
-  margin-top:10px;
-}
-
-/* highlight */
 .highlight{
   background:red;
   padding:2px 5px;
