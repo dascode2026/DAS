@@ -17,42 +17,52 @@ const data = {
   ]
 };
 
-/* عرض البيانات */
-function render() {
-  for (let section in data) {
-    let container = document.getElementById(section);
-    container.innerHTML = "";
+/* عرض الجداول */
+function render(){
+  for(let section in data){
+    let table = document.getElementById(section);
+    table.innerHTML = "";
 
-    data[section].forEach(item => {
-      container.innerHTML += `
-        <div class="code-box">
-          <div class="code">${item.code}</div>
-          <div class="desc">${item.desc}</div>
-        </div>
+    data[section].forEach((item,i)=>{
+      table.innerHTML += `
+        <tr id="${section}-${i}">
+          <td class="code">${item.code}</td>
+          <td class="desc">${item.desc}</td>
+        </tr>
       `;
     });
   }
 }
 
-/* البحث */
-function searchCode() {
-  let value = document.getElementById("search").value.toLowerCase();
+/* 🔍 بحث ذكي + انتقال + تمييز */
+function searchCode(){
+  let value = document.getElementById("search").value.trim();
 
-  for (let section in data) {
-    let container = document.getElementById(section);
-    container.innerHTML = "";
+  if(value === ""){
+    render();
+    return;
+  }
 
-    data[section].forEach(item => {
-      if (
-        item.code.includes(value) ||
-        item.desc.includes(value)
-      ) {
-        container.innerHTML += `
-          <div class="code-box">
-            <div class="code highlight">${item.code}</div>
-            <div class="desc">${item.desc}</div>
-          </div>
+  for(let section in data){
+    let table = document.getElementById(section);
+    table.innerHTML = "";
+
+    data[section].forEach((item,i)=>{
+
+      if(item.code.includes(value)){
+
+        table.innerHTML += `
+          <tr id="${section}-${i}" style="background:#1f2937;">
+            <td class="code highlight">${item.code}</td>
+            <td class="desc">${item.desc}</td>
+          </tr>
         `;
+
+        /* 📍 ينزل مباشرة للمكان */
+        setTimeout(()=>{
+          document.getElementById(`${section}-${i}`)
+          .scrollIntoView({behavior:"smooth", block:"center"});
+        },50);
       }
     });
   }

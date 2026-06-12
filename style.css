@@ -1,72 +1,82 @@
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
 }
 
 /* الشريط العلوي */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px;
-  background: #111827;
-  position: sticky;
-  top: 0;
+.topbar{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:15px;
+  background:#111827;
+  position:sticky;
+  top:0;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #38bdf8;
+/* اسم الموقع */
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color:#38bdf8;
 }
 
-/* البحث */
-input {
-  width: 70%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
+/* 🔎 البحث الجديد (كبير واحترافي) */
+input{
+  flex:1;
+  height:50px;
+  border-radius:12px;
+  border:none;
+  outline:none;
+  padding:0 15px;
+  font-size:16px;
 }
 
-/* الأقسام */
-.section {
-  padding: 20px;
+/* العناوين */
+h2{
+  margin:25px 10px 10px;
+  color:#38bdf8;
 }
 
-.section h2 {
-  color: #38bdf8;
-  border-bottom: 1px solid #334155;
-  padding-bottom: 5px;
+/* جدول الأكواد */
+table{
+  width:95%;
+  margin:auto;
+  border-collapse:collapse;
+  margin-bottom:40px;
+  background:#111827;
+  border-radius:10px;
+  overflow:hidden;
 }
 
-/* بطاقة الكود */
-.code-box {
-  background: #1e293b;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 12px;
-  border-right: 4px solid #38bdf8;
+/* الصفوف */
+tr{
+  border-bottom:1px solid #1f2937;
+}
+
+/* الخلايا */
+td{
+  padding:12px;
 }
 
 /* الكود */
-.code {
-  font-weight: bold;
-  color: #fbbf24;
+.code{
+  color:#fbbf24;
+  font-weight:bold;
+  width:120px;
 }
 
 /* الوصف */
-.desc {
-  margin-top: 5px;
-  color: #cbd5e1;
+.desc{
+  color:#cbd5e1;
 }
 
-/* التمييز عند البحث */
-.highlight {
-  background: red;
-  color: white;
-  padding: 2px 4px;
-  border-radius: 5px;
+/* تمييز البحث */
+.highlight{
+  background:red;
+  color:white;
+  padding:3px 6px;
+  border-radius:6px;
 }
