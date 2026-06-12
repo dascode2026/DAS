@@ -1,108 +1,117 @@
 const data = {
   ABA: [
     { code: "0110", desc: "جهد منخفض" },
-    { code: "F015", desc: "عطل داخلي" },
-    { code: "0205", desc: "مشكلة رادار" }
+    { code: "0111", desc: "جهد مرتفع" }
   ],
   ART: [
-    { code: "0200", desc: "عطل حساس رادار" },
-    { code: "F120", desc: "خطأ نظام" }
+    { code: "0200", desc: "عطل حساس الرادار" }
   ],
   BS: [
-    { code: "0160", desc: "CAN Bus Error" }
+    { code: "0160", desc: "CAN Bus" }
   ],
   BTS: [
-    { code: "0110", desc: "Internal Fault" }
+    { code: "0110", desc: "عطل داخلي" }
   ],
   EDW: [
-    { code: "F050", desc: "Alarm System Fault" }
+    { code: "F050", desc: "إنذار" }
   ]
 };
 
+/* ================= تشغيل مباشر وآمن ================= */
 let allResults = [];
 
-/* ================= INIT ================= */
-function init(){
+/* بناء البيانات مباشرة */
+function buildDatabase(){
+
   allResults = [];
 
   for(let section in data){
+
+    if(!Array.isArray(data[section])) continue;
+
     data[section].forEach(item=>{
       allResults.push({
         section,
-        code: item.code,
-        desc: item.desc
+        code: String(item.code),
+        desc: String(item.desc)
       });
     });
-  }
 
-  renderList(allResults);
+  }
 }
 
-init();
-
-/* ================= RENDER LIST ================= */
+/* ================= عرض ================= */
 function renderList(list){
 
   const box = document.getElementById("list");
+  if(!box) return;
+
   box.innerHTML = "";
 
   list.forEach(item=>{
 
-    box.innerHTML += `
-      <div onclick="showDetails('${item.section}','${item.code}','${item.desc}')">
-        <b>${item.code}</b> - ${item.desc}
-        <small style="display:block;color:#888">${item.section}</small>
-      </div>
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <b>${item.code}</b> - ${item.desc}
+      <small style="display:block;color:#888">${item.section}</small>
     `;
+
+    div.onclick = () => showDetails(item);
+
+    box.appendChild(div);
 
   });
 
-  document.getElementById("resultCount")
-  .innerText = `Results: ${list.length}`;
+  document.getElementById("resultCount").innerText =
+  "Results: " + list.length;
+
 }
 
-/* ================= SEARCH ================= */
+/* ================= بحث ================= */
 function searchCode(){
 
-  const value =
-  document.getElementById("search")
-  .value
-  .trim()
-  .toUpperCase();
+  const input = document.getElementById("search");
+  if(!input) return;
+
+  const value = input.value.trim().toUpperCase();
 
   if(value === ""){
     renderList(allResults);
     return;
   }
 
-  const filtered =
-  allResults.filter(item =>
-    item.code.includes(value) ||
-    item.desc.toUpperCase().includes(value)
-  );
+  const filtered = allResults.filter(item=>{
+    return item.code.includes(value) ||
+           item.desc.toUpperCase().includes(value);
+  });
 
   renderList(filtered);
 }
 
-/* ================= DETAILS ================= */
-function showDetails(section, code, desc){
+/* ================= تفاصيل ================= */
+function showDetails(item){
 
-  document.getElementById("details").innerHTML = `
+  const box = document.getElementById("details");
+  if(!box) return;
+
+  box.innerHTML = `
     <div class="card">
 
-      <div class="code">${code}</div>
+      <div class="code">${item.code}</div>
 
-      <div class="desc">${desc}</div>
+      <div class="desc">${item.desc}</div>
 
-      <hr style="margin:15px 0">
+      <hr>
 
-      <div>System: ${section}</div>
-
-      <div style="margin-top:10px;color:#888">
-        Diagnostic Information Loaded
-      </div>
+      <div>System: ${item.section}</div>
 
     </div>
   `;
-
 }
+
+/* ================= تشغيل مضمون 100% ================= */
+window.addEventListener("load", function(){
+  buildDatabase();
+  renderList(allResults);
+});
