@@ -9,63 +9,62 @@ body{
 .topbar{
   display:flex;
   align-items:center;
-  gap:15px;
-  padding:15px;
+  gap:20px;
+  padding:20px;
   background:#111827;
   position:sticky;
   top:0;
 }
 
-/* اسم الموقع */
+/* اسم الموقع كبير */
 .logo{
-  font-size:24px;
+  font-size:32px;
   font-weight:bold;
   color:#38bdf8;
 }
 
-/* 🔎 البحث الجديد (كبير واحترافي) */
+/* 🔎 البحث الكبير */
 input{
   flex:1;
-  height:50px;
-  border-radius:12px;
+  height:60px;
+  font-size:18px;
+  border-radius:14px;
   border:none;
   outline:none;
-  padding:0 15px;
-  font-size:16px;
+  padding:0 20px;
 }
 
-/* العناوين */
-h2{
-  margin:25px 10px 10px;
+/* عنوان القسم في المنتصف */
+.section-title{
+  text-align:center;
+  margin:30px 0 10px;
+  font-size:22px;
   color:#38bdf8;
+  letter-spacing:2px;
 }
 
-/* جدول الأكواد */
+/* جدول بعرض الصفحة */
 table{
-  width:95%;
-  margin:auto;
+  width:100%;
   border-collapse:collapse;
-  margin-bottom:40px;
   background:#111827;
-  border-radius:10px;
-  overflow:hidden;
 }
 
-/* الصفوف */
+/* صفوف */
 tr{
   border-bottom:1px solid #1f2937;
 }
 
-/* الخلايا */
+/* خانات */
 td{
-  padding:12px;
+  padding:15px;
 }
 
 /* الكود */
 .code{
+  width:120px;
   color:#fbbf24;
   font-weight:bold;
-  width:120px;
 }
 
 /* الوصف */

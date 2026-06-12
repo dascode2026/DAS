@@ -9,28 +9,32 @@
 <body>
 
 <header class="topbar">
+
   <div class="logo">DAS</div>
 
-  <input id="search" type="text"
-    placeholder="ابحث عن كود مثل 0110..."
-    oninput="searchCode()">
+  <input id="search"
+         type="text"
+         placeholder="ابحث برقم الكود (5 أرقام فقط)"
+         maxlength="5"
+         oninput="searchCode()">
+
 </header>
 
 <div class="container">
 
-  <h2>ABA</h2>
+  <h2 class="section-title">ABA</h2>
   <table id="aba"></table>
 
-  <h2>ART</h2>
+  <h2 class="section-title">ART</h2>
   <table id="art"></table>
 
-  <h2>BS</h2>
+  <h2 class="section-title">BS</h2>
   <table id="bs"></table>
 
-  <h2>BTS</h2>
+  <h2 class="section-title">BTS</h2>
   <table id="bts"></table>
 
-  <h2>EDW</h2>
+  <h2 class="section-title">EDW</h2>
   <table id="edw"></table>
 
 </div>

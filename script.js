@@ -13,7 +13,7 @@ const data = {
     { code: "0110", desc: "عطل داخلي" }
   ],
   edw: [
-    { code: "F052", desc: "لا توجد تغذية" }
+    { code: "0050", desc: "لا توجد تغذية" }
   ]
 };
 
@@ -34,12 +34,17 @@ function render(){
   }
 }
 
-/* 🔍 بحث ذكي + انتقال + تمييز */
+/* 🔍 بحث دقيق (5 أرقام فقط) */
 function searchCode(){
   let value = document.getElementById("search").value.trim();
 
-  if(value === ""){
-    render();
+  /* منع غير الأرقام */
+  if(/\D/.test(value)){
+    return;
+  }
+
+  /* إذا أكثر من 5 أرقام نوقف */
+  if(value.length > 5){
     return;
   }
 
@@ -49,22 +54,27 @@ function searchCode(){
 
     data[section].forEach((item,i)=>{
 
-      if(item.code.includes(value)){
+      if(item.code.includes(value) && value !== ""){
 
         table.innerHTML += `
-          <tr id="${section}-${i}" style="background:#1f2937;">
+          <tr id="${section}-${i}" style="background:#1f2937">
             <td class="code highlight">${item.code}</td>
             <td class="desc">${item.desc}</td>
           </tr>
         `;
 
-        /* 📍 ينزل مباشرة للمكان */
+        /* 📍 ينزل مباشرة للكود */
         setTimeout(()=>{
           document.getElementById(`${section}-${i}`)
           .scrollIntoView({behavior:"smooth", block:"center"});
         },50);
       }
     });
+  }
+
+  /* لو البحث فاضي نعرض الكل */
+  if(value === ""){
+    render();
   }
 }
 
