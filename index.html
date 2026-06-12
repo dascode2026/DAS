@@ -1,33 +1,37 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>DAS Codes</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<div class="app">
 
-<body>
+  <!-- HEADER -->
+  <header class="top">
 
-<h1>نظام أكواد الأعطال</h1>
+    <div class="title">DAS DIAGNOSTIC TOOL</div>
 
-<input id="search" placeholder="ابحث بالكود" oninput="searchCode()">
+    <input id="search"
+           placeholder="Search DTC / Code / Text..."
+           oninput="searchCode()">
 
-<h2>ABA</h2>
-<table id="aba"></table>
+  </header>
 
-<h2>ART</h2>
-<table id="art"></table>
+  <!-- BODY -->
+  <div class="body">
 
-<h2>BS</h2>
-<table id="bs"></table>
+    <!-- LEFT RESULT PANEL -->
+    <div class="left">
 
-<h2>BTS</h2>
-<table id="bts"></table>
+      <div id="resultCount">All Codes</div>
 
-<h2>EDW</h2>
-<table id="edw"></table>
+      <div id="list"></div>
 
-<script src="script.js"></script>
+    </div>
 
-</body>
-</html>
+    <!-- RIGHT DETAILS -->
+    <div class="right">
+
+      <div id="details">
+        Select a code to view details
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

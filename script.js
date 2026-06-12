@@ -1,83 +1,108 @@
 const data = {
-  aba: [
+  ABA: [
     { code: "0110", desc: "جهد منخفض" },
-    { code: "0111", desc: "جهد مرتفع" },
-    { code: "0160", desc: "عطل نظام ABA" }
+    { code: "F015", desc: "عطل داخلي" },
+    { code: "0205", desc: "مشكلة رادار" }
   ],
-  art: [
-    { code: "0100", desc: "عطل ART" },
-    { code: "0200", desc: "عطل رادار" }
+  ART: [
+    { code: "0200", desc: "عطل حساس رادار" },
+    { code: "F120", desc: "خطأ نظام" }
   ],
-  bs: [
-    { code: "0117", desc: "اختلاف سرعة" },
-    { code: "0160", desc: "CAN Bus" }
+  BS: [
+    { code: "0160", desc: "CAN Bus Error" }
   ],
-  bts: [
-    { code: "0110", desc: "عطل BTS" }
+  BTS: [
+    { code: "0110", desc: "Internal Fault" }
   ],
-  edw: [
-    { code: "5001", desc: "إنذار باب" }
+  EDW: [
+    { code: "F050", desc: "Alarm System Fault" }
   ]
 };
 
-/* ================= render ================= */
-function render() {
-  for (let section in data) {
-    const table = document.getElementById(section);
-    if (!table) continue;
+let allResults = [];
 
-    table.innerHTML = "";
+/* ================= INIT ================= */
+function init(){
+  allResults = [];
 
-    data[section].forEach((item, i) => {
-      table.innerHTML += `
-        <tr id="${section}-${i}">
-          <td class="code">${item.code}</td>
-          <td>${item.desc}</td>
-        </tr>
-      `;
-    });
-  }
-}
-
-/* ================= search ================= */
-function searchCode() {
-  const value = document.getElementById("search").value.trim();
-
-  render();
-
-  if (value === "") return;
-  if (/\D/.test(value)) return;
-  if (value.length > 5) return;
-
-  let first = null;
-
-  for (let section in data) {
-    const rows = document.querySelectorAll(`#${section} tr`);
-
-    rows.forEach(row => {
-      const codeCell = row.querySelector(".code");
-      if (!codeCell) return;
-
-      const code = codeCell.textContent;
-
-      if (code.includes(value)) {
-        row.style.background = "#1f2937";
-        codeCell.innerHTML = code.replace(
-          value,
-          `<span class="highlight">${value}</span>`
-        );
-
-        if (!first) first = row;
-      }
+  for(let section in data){
+    data[section].forEach(item=>{
+      allResults.push({
+        section,
+        code: item.code,
+        desc: item.desc
+      });
     });
   }
 
-  if (first) {
-    setTimeout(() => {
-      first.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
-  }
+  renderList(allResults);
 }
 
-/* init */
-render();
+init();
+
+/* ================= RENDER LIST ================= */
+function renderList(list){
+
+  const box = document.getElementById("list");
+  box.innerHTML = "";
+
+  list.forEach(item=>{
+
+    box.innerHTML += `
+      <div onclick="showDetails('${item.section}','${item.code}','${item.desc}')">
+        <b>${item.code}</b> - ${item.desc}
+        <small style="display:block;color:#888">${item.section}</small>
+      </div>
+    `;
+
+  });
+
+  document.getElementById("resultCount")
+  .innerText = `Results: ${list.length}`;
+}
+
+/* ================= SEARCH ================= */
+function searchCode(){
+
+  const value =
+  document.getElementById("search")
+  .value
+  .trim()
+  .toUpperCase();
+
+  if(value === ""){
+    renderList(allResults);
+    return;
+  }
+
+  const filtered =
+  allResults.filter(item =>
+    item.code.includes(value) ||
+    item.desc.toUpperCase().includes(value)
+  );
+
+  renderList(filtered);
+}
+
+/* ================= DETAILS ================= */
+function showDetails(section, code, desc){
+
+  document.getElementById("details").innerHTML = `
+    <div class="card">
+
+      <div class="code">${code}</div>
+
+      <div class="desc">${desc}</div>
+
+      <hr style="margin:15px 0">
+
+      <div>System: ${section}</div>
+
+      <div style="margin-top:10px;color:#888">
+        Diagnostic Information Loaded
+      </div>
+
+    </div>
+  `;
+
+}

@@ -1,51 +1,96 @@
-body {
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  padding: 20px;
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
 }
 
-h1 {
-  text-align: center;
+/* ===== APP ===== */
+.app{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-h2 {
-  color: #38bdf8;
-  text-align: center;
+/* ===== HEADER ===== */
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:#111827;
+  position:sticky;
+  top:0;
 }
 
-input {
-  width: 90%;
-  display: block;
-  margin: 20px auto;
-  padding: 15px;
-  font-size: 18px;
-  border-radius: 10px;
-  border: none;
+.title{
+  font-size:18px;
+  font-weight:bold;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 30px;
+#search{
+  width:60%;
+  height:45px;
+  border:none;
+  border-radius:10px;
+  padding:0 10px;
 }
 
-td {
-  padding: 10px;
-  border-bottom: 1px solid #334155;
+/* ===== BODY ===== */
+.body{
+  display:flex;
+  height:100%;
 }
 
-.code {
-  width: 120px;
-  font-weight: bold;
+/* LEFT */
+.left{
+  width:35%;
+  border-right:1px solid #334155;
+  overflow:auto;
 }
 
-tr:hover {
-  background: #111827;
+#resultCount{
+  padding:10px;
+  color:#38bdf8;
+  text-align:center;
 }
 
-.highlight {
-  background: red;
-  padding: 2px 4px;
-  border-radius: 4px;
+#list div{
+  padding:10px;
+  border-bottom:1px solid #1f2937;
+  cursor:pointer;
+}
+
+#list div:hover{
+  background:#1f2937;
+}
+
+/* RIGHT */
+.right{
+  width:65%;
+  padding:20px;
+}
+
+/* DETAILS */
+.card{
+  background:#111827;
+  padding:20px;
+  border-radius:10px;
+}
+
+.code{
+  font-size:22px;
+  font-weight:bold;
+  color:#38bdf8;
+}
+
+.desc{
+  margin-top:10px;
+}
+
+/* highlight */
+.highlight{
+  background:red;
+  padding:2px 5px;
+  border-radius:5px;
 }
