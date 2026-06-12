@@ -242,47 +242,38 @@
     </main>
 
     <script>
-    
-    
-            const faultDatabase = [
-            { system: "ABA – مساعد الفرامل النشط", code: "0110", desc: "جهد كهربي منخفض بسلك الكهرباء الخاص بالكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0111", desc: "جهد كهربى مرتفع بسلك الكهرباء الخاص بالكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0150", desc: "عطل داخلي بالكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0160", desc: "عطل بنظام تشغيل الفرامل المساعدة ABA" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0170", desc: "عطل داخلي بالكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0180", desc: "خطأ في عملية بداية التشغيل" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0205", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الردارى للكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0206", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الرداري للكنترول" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0290", desc: "سيقوم كنترول مساعد الفرامل ABA باكتشاف اي اصطدام محتمل في مقدمة الشاحنة" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0305", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الفرامل BS" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0306", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الفرامل BS" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0405", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الكابينة FR" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0406", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الكابينة FR" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0505", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA شاشة العدادات INS" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0506", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول شاشة العدادات INS" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0605", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA التحكم الرئيسي GM" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0606", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول التحكم الرئيسي GM" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0705", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA السويتشات MSF" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0706", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول السويتشات MSF" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0805", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الخباص TCO" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0806", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الخباص TCO" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0905", desc: "انقطاع الاتصال بين كنترول مساعد الفرامل ABA وقاعدة البيانات لشبكة التحكم الرئيسية CAN" },
-            { system: "ABA – مساعد الفرامل النشط", code: "0907", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل ABA و لشبكة التحكم الرئيسية CAN" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1008", desc: "قطع باحد اسلاك دائرة الامداد بالكهرباء لل Terminal30" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1108", desc: "قطع باحد اسلاك دائرة الإمداد بالكهرباء لل Terminal15" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1205", desc: "انقطاع الاتصال بين كنترول مساعد الفرامل ABA وكنترول المحرك MR" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1206", desc: "خطأ في رسائل شبكة التحكم الرئيسية CAN المرسلة من كنترول المحرك MR" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1305", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA التحكم في البطارية BTS" },
-            { system: "ABA – مساعد الفرامل النشط", code: "1306", desc: "خطأ في رسائل شبكة التحكم الرئيسية CAN المرسلة من كنترول التحكم في البطارية BTS" },
-            { system: "ART – نظام الرادار", code: "0100", desc: "عطل داخلي بكنترول ART" },
-            { system: "ART – نظام الرادار", code: "0150", desc: "عطل كلي بكنترول ART" },
-            { system: "ART – نظام الرادار", code: "0200", desc: "عطل بحساس الرادار" },
-            { system: "ART – نظام الرادار", code: "0202", desc: "خطأ في عمل حساس الرادار مع نظام الفرامل المساعدة ABA" },
-            { system: "ART – نظام الرادار", code: "0203", desc: "عطل في قياس درجة الحرارة" },
-            { system: "ART – نظام الرادار", code: "0204", desc: "عطل في قياس درجة الحرارة" }, 
-
-    
-    
+        // --- قاعدة بيانات الأعطال المستبدلة والمحدثة بالكامل لقسم FM والأنظمة المرتبطة بها ---
+        const faultDatabase = [
+        // --- أكواد قسم ABA الجديدة (إضافة فقط داخل مصفوفة faultDatabase) ---
+{ system: "ABA – مساعد الفرامل النشط", code: "0110", desc: "جهد كهربي منخفض بسلك الكهرباء الخاص بالكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0111", desc: "جهد كهربى مرتفع بسلك الكهرباء الخاص بالكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0150", desc: "عطل داخلي بالكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0160", desc: "عطل بنظام تشغيل الفرامل المساعدة ABA" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0170", desc: "عطل داخلي بالكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0180", desc: "خطأ في عملية بداية التشغيل" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0205", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الردارى للكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0206", desc: "مشكلة في اتصال كنترول مساعد الفرامل ABA مع الحساس الرداري للكنترول" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0290", desc: "سيقوم كنترول مساعد الفرامل ABA باكتشاف اي اصطدام محتمل في مقدمة الشاحنة" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0305", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الفرامل BS" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0306", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الفرامل BS" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0405", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الكابينة FR" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0406", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الكابينة FR" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0505", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA شاشة العدادات INS" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0506", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول شاشة العدادات INS" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0605", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA التحكم الرئيسي GM" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0606", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول التحكم الرئيسي GM" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0705", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA السويتشات MSF" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0706", desc: "خطأ في اتصال شبكة التحكم الرئيسية CAN مع كنترول السويتشات MSF" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0805", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل وكنترول ABA الخباص TCO" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0806", desc: "خطأ فى اتصال شبكة التحكم الرئيسية CAN مع كنترول الخباص TCO" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0905", desc: "انقطاع الاتصال بين كنترول مساعد الفرامل ABA وقاعدة البيانات لشبكة التحكم الرئيسية CAN" },
+{ system: "ABA – مساعد الفرامل النشط", code: "0907", desc: "خطأ في الاتصال بين كنترول مساعد الفرامل ABA و لشبكة التحكم الرئيسية CAN" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1008", desc: "قطع باحد اسلاك دائرة الامداد بالكهرباء لل Terminal30" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1108", desc: "قطع باحد اسلاك دائرة الإمداد بالكهرباء لل Terminal15" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1205", desc: "انقطاع الاتصال بين كنترول مساعد الفرامل ABA وكنترول المحرك MR" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1206", desc: "خطأ في رسائل شبكة التحكم الرئيسية CAN المرسلة من كنترول المحرك MR" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1305", desc: "خطأ فى الاتصال بين كنترول مساعد الفرامل وكنترول ABA التحكم في البطارية BTS" },
+{ system: "ABA – مساعد الفرامل النشط", code: "1306", desc: "خطأ في رسائل شبكة التحكم الرئيسية CAN المرسلة من كنترول التحكم في البطارية BTS" },
 { system: "ART – نظام الرادار", code: "0100", desc: "عطل داخلي بكنترول ART" },
 { system: "ART – نظام الرادار", code: "0150", desc: "عطل كلي بكنترول ART" },
 { system: "ART – نظام الرادار", code: "0200", desc: "عطل بحساس الرادار" },
@@ -1302,35 +1293,45 @@
   { "code": "3204", "description": "ماس كهربائي بالسلك الأرضي المشترك بين صمامات التحكم في إمداد وفصل الهواء" }
 
            
-        
+          
         ];
 
-        
-        // دالة عرض البيانات
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const statsBar = document.getElementById('statsBar');
+
+        // دالة تجميع الأعطال وعرضها بدون تكرار للقسم البارز
         function showFaults(data) {
-            const resultsContainer = document.getElementById('resultsContainer');
-            const statsBar = document.getElementById('statsBar');
             resultsContainer.innerHTML = '';
-            
+
             if (data.length === 0) {
-                resultsContainer.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
-                statsBar.innerText = 'تم العثور على: 0 عطل';
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>لم يتم العثور على نتائج مطابقة</h3>
+                        <p style="margin-top: 8px; font-size: 13px;">تأكد من إدخال الأحرف أو الأرقام بشكل صحيح.</p>
+                    </div>`;
+                statsBar.innerText = `تم العثور على: 0 عطل`;
                 return;
             }
 
-            // تجميع الأعطال حسب النظام
-            const grouped = data.reduce((acc, item) => {
-                if (!acc[item.system]) acc[item.system] = [];
-                acc[item.system].push(item);
-                return acc;
-            }, {});
+            // تجميع الأعطال حسب اسم القسم ليعرض مرة واحدة فقط في الأعلى
+            const groupedData = {};
+            data.forEach(item => {
+                if (!groupedData[item.system]) {
+                    groupedData[item.system] = [];
+                }
+                groupedData[item.system].push(item);
+            });
 
-            Object.keys(grouped).forEach(systemName => {
+            // بناء المجموعات وعزل البطاقات التابعة
+            for (const systemName in groupedData) {
                 const systemGroup = document.createElement('div');
                 systemGroup.className = 'system-group';
+
+                const titleHtml = `<div class="system-main-title">${systemName}</div>`;
                 
-                let cardsListHtml = '<div class="system-main-title">' + systemName + '</div><div class="cards-list">';
-                grouped[systemName].forEach(fault => {
+                let cardsListHtml = '<div class="cards-list">';
+                groupedData[systemName].forEach(fault => {
                     cardsListHtml += `
                         <div class="fault-card">
                             <div class="fault-details">
@@ -1341,27 +1342,34 @@
                     `;
                 });
                 cardsListHtml += '</div>';
-                systemGroup.innerHTML = cardsListHtml;
+
+                systemGroup.innerHTML = titleHtml + cardsListHtml;
                 resultsContainer.appendChild(systemGroup);
-            });
+            }
 
             statsBar.innerText = `تم العثور على: ${data.length} عطل`;
         }
 
-        // دالة البحث
+        // دالة التصفية والبحث الفوري
         function doSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const filtered = faultDatabase.filter(item => 
-                item.code.toLowerCase().includes(query) || 
-                item.desc.toLowerCase().includes(query) ||
-                item.system.toLowerCase().includes(query)
-            );
+            const query = searchInput.value.toLowerCase().trim();
+
+            const filtered = faultDatabase.filter(item => {
+                return item.code.toLowerCase().includes(query) || 
+                       item.desc.toLowerCase().includes(query) ||
+                       item.system.toLowerCase().includes(query);
+            });
+
             showFaults(filtered);
         }
 
-        document.getElementById('searchInput').addEventListener('input', doSearch);
-        document.addEventListener('DOMContentLoaded', () => showFaults(faultDatabase));
-    </script>
+        searchInput.addEventListener('input', doSearch);
 
+        // التشغيل التلقائي وتثبيت التركيز داخل حقل البحث
+        document.addEventListener('DOMContentLoaded', () => {
+            showFaults(faultDatabase);
+            searchInput.focus();
+        });
+    </script>
 </body>
 </html>
