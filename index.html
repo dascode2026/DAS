@@ -1,37 +1,308 @@
-<div class="app">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS Diagnostic Tool - نظام فحص الأعطال</title>
+    <style>
+        /* --- الألوان الأساسية والتنسيق العام --- */
+        :root {
+            --bg-color: #0f172a;       /* أزرق داكن جداً للمجال الاحترافي */
+            --panel-bg: #1e293b;       /* لون بطاقات الأعطال */
+            --header-bg: #1e293b;      /* لون الهيدر */
+            --text-main: #f8fafc;      /* النص الأساسي */
+            --text-muted: #94a3b8;     /* النص الثانوي */
+            --accent-color: #38bdf8;   /* لون التمييز - أزرق سماوي مضيء */
+            --badge-bg: #0ea5e9;        /* خلفية اسم القسم */
+            --border-color: #334155;   /* لون الحدود */
+        }
 
-  <!-- HEADER -->
-  <header class="top">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    <div class="title">DAS DIAGNOSTIC TOOL</div>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 40px;
+        }
 
-    <input id="search"
-           placeholder="Search DTC / Code / Text..."
-           oninput="searchCode()">
+        /* --- الهيدر (Header) --- */
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 2px solid var(--accent-color);
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
 
-  </header>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
 
-  <!-- BODY -->
-  <div class="body">
+        /* القسم الأيمن: مربع البحث بالكامل */
+        .header-right {
+            flex: 1;
+            max-width: 600px;
+        }
 
-    <!-- LEFT RESULT PANEL -->
-    <div class="left">
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
 
-      <div id="resultCount">All Codes</div>
+        .search-box:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
 
-      <div id="list"></div>
+        /* القسم الأيسر: اسم الموقع */
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
 
-    </div>
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    <!-- RIGHT DETAILS -->
-    <div class="right">
+        .logo-sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: normal;
+            border-right: 1px solid var(--border-color);
+            padding-right: 10px;
+            margin-right: 10px;
+        }
 
-      <div id="details">
-        Select a code to view details
-      </div>
+        /* --- الحاوية الرئيسية ومؤشرات الإحصائيات --- */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
 
-    </div>
+        .stats-bar {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
 
-  </div>
+        /* --- عرض الأعطال (Cards) --- */
+        .results-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
 
-</div>
+        /* كرت العطل المعزول */
+        .fault-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fault-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        /* الهيدر الصغير داخل كرت العطل لتبعية القسم */
+        .fault-system-tag {
+            display: inline-block;
+            background-color: rgba(14, 165, 233, 0.15);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .fault-main-info {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* رقم الكود */
+        .fault-code {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: monospace, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* وصف العطل */
+        .fault-description {
+            font-size: 16px;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        /* حالة عدم وجود نتائج */
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            background-color: var(--panel-bg);
+            border-radius: 10px;
+            color: var(--text-muted);
+            border: 1px dashed var(--border-color);
+        }
+
+        /* --- التوافق مع الجوال (Responsive) --- */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column-reverse; /* يجعل البحث فوق الاسم في الشاشات الصغيرة لتسهيل الاستخدام */
+                align-items: stretch;
+            }
+
+            .header-right {
+                max-width: 100%;
+            }
+
+            .header-left {
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
+            .fault-main-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="header-right">
+                <input type="text" id="searchInput" class="search-box" placeholder="ابحث برقم الكود أو الوصف (مثال: F015 أو فرامل)...">
+            </div>
+            
+            <div class="header-left">
+                <div class="logo">
+                    DAS <span class="logo-sub">Diagnostic Tool</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="stats-bar" id="statsBar">
+            جاري تحميل قاعدة البيانات...
+        </div>
+
+        <div class="results-container" id="resultsContainer"></div>
+
+    </main>
+
+    <script>
+        // --- قاعدة بيانات الأعطال الثابتة (Client-side Data) ---
+        // يمكنك إضافة مئات الأكواد هنا مباشرة وسيعمل البحث بلمح البصر
+        const faultDatabase = [
+            { system: "ABA – مساعد الفرامل النشط", code: "F015", desc: "خطأ في الاتصال بمستشعر الرادار الأمامي" },
+            { system: "ABA – مساعد الفرامل النشط", code: "0110", desc: "جهد الإشارة لمستشعر مسافة الأمان خارج النطاق المسموح" },
+            { system: "ART – الرادار والملاحة", code: "F052", desc: "وحدة التحكم ART لا تستجيب لبيانات ناقل الـ CAN" },
+            { system: "ART – الرادار والملاحة", code: "1305", desc: "انحراف في معايرة مستشعر الرادار الأفقي" },
+            { system: "BS – نظام الفرامل", code: "0110", desc: "مستشعر سرعة العجلة الأمامية اليمنى - إشارة غير منطقية" },
+            { system: "BS – نظام الفرامل", code: "1305", desc: "صمام التحكم في ضغط التعديل الخلفي الأيسر به دائرة مفتوحة" },
+            { system: "BTS – إدارة البطارية", code: "F015", desc: "مستشعر درجة حرارة البطارية يعطي قراءة مرتفعة جداً" },
+            { system: "EDW – نظام الحماية والإنذار", code: "0110", desc: "مفتاح الاتصال الخاص بغطاء المحرك عاطل أو به ماس كهربائي" }
+        ];
+
+        // عناصر الواجهة
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const statsBar = document.getElementById('statsBar');
+
+        // دالة عرض الأعطال بالكامل في الصفحة
+        function displayResults(data) {
+            resultsContainer.innerHTML = '';
+
+            if (data.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>لم يتم العثور على أكواد مطابقة</h3>
+                        <p style="margin-top: 10px; font-size: 14px;">تأكد من كتابة الكود بشكل صحيح أو جرب كلمات أخرى.</p>
+                    </div>`;
+                statsBar.innerText = `نتائج البحث: 0 عطل`;
+                return;
+            }
+
+            // بناء الكروت المعزولة والأنيقة
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'fault-card';
+
+                card.innerHTML = `
+                    <div class="fault-system-tag">${item.system}</div>
+                    <div class="fault-main-info">
+                        <span class="fault-code">${item.code}</span>
+                        <p class="fault-description">${item.desc}</p>
+                    </div>
+                `;
+                resultsContainer.appendChild(card);
+            });
+
+            statsBar.innerText = `تم العثور على: ${data.length} عطل`;
+        }
+
+        // دالة التصفية والبحث الفوري (Real-time Search)
+        function filterFaults() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            const filtered = faultDatabase.filter(item => {
+                return item.code.toLowerCase().includes(query) || 
+                       item.desc.toLowerCase().includes(query) ||
+                       item.system.toLowerCase().includes(query);
+            });
+
+            displayResults(filtered);
+        }
+
+        // الاستماع لحدث الكتابة في حقل البحث
+        searchInput.addEventListener('input', filterFaults);
+
+        // تشغيل العرض الأولي عند فتح الصفحة لأول مرة
+        document.addEventListener('DOMContentLoaded', () => {
+            displayResults(faultDatabase);
+            searchInput.focus(); // وضع مؤشر الكتابة تلقائياً في مربع البحث لسرعة الاستخدام
+        });
+    </script>
+</body>
+</html>
